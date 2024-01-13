@@ -1,5 +1,4 @@
 import Employee, { EmployeeCreationAttributes } from "../entities/Employee";
-import Address from "../entities/Task";
 import { Tasks } from "../entities/dbConst";
 import { Like } from "./operators";
 import employeeFilterDto from "./models/employeeFilterDto";
