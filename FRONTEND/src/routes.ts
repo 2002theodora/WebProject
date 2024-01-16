@@ -1,6 +1,8 @@
 import Task from "./views/Tasks";
 import Employee from "./views/Employee";
+import Manager from "./views/Manager";
 import EmployeeEdit from "./views/EmployeeEdit";
+import ManagerEdit from "./views/ManagerEdit";
 import Home from "./views/Home";
 import NotFound from "./views/NotFound";
 
@@ -21,6 +23,11 @@ export const routes = Object.freeze([
         name: "Employee"
     },
     {
+        path:"/Manager",
+        component: Manager,
+        name: "Manager"
+    },
+    {
         path:"*",
         component: NotFound,
         name: null
@@ -33,6 +40,16 @@ export const routes = Object.freeze([
     {
         path:"/EditEmployee/:id",
         component: EmployeeEdit,
+        name: null
+    },
+    {
+        path:"/NewManager/",
+        component: ManagerEdit,
+        name: null
+    },
+    {
+        path:"/EditManager/:id",
+        component: ManagerEdit,
         name: null
     }
 ]);

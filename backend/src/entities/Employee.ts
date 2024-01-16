@@ -2,8 +2,9 @@ import db from '../dbConfig';
 import Sequelize from 'sequelize';
 import { ModelDefined } from 'sequelize';
 import { TaskAttributes } from './Task.ts';
+import { CommonAttributes } from './CommonAttributes';
 
-export interface EmployeeAttributes{
+export interface EmployeeAttributes extends CommonAttributes{
     EmployeeId : number,
     EmployeeName: string,
     EmployeeSurName: string,
@@ -13,7 +14,6 @@ export interface EmployeeAttributes{
     EmployeeEmail: string | null,
     ManagerId: number,
     Tasks: TaskAttributes[]
-   
 }
 
 export interface EmployeeCreationAttributes extends EmployeeAttributes {}
@@ -67,7 +67,7 @@ const Employee : ModelDefined<EmployeeAttributes, EmployeeCreationAttributes> = 
     {
         type: Sequelize.STRING,
         allowNull: true
-    }
+    },
 });
 
 export default Employee;
