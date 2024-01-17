@@ -1,11 +1,9 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import LoginScreen from './components/Login';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import AdminPage from './views/AdminPage';
-import { useEffect } from 'react';
+import TodoList from './components/TodoList';
 
 interface Admin {
   role: 'admin';
@@ -50,6 +48,7 @@ function App() {
   }, [user, navigate]);
 
   return (
+    <div>
   <div className="App">
     <Routes>
         <Route path="/login" element={<LoginScreen onLogin={handleLogin} />} />
@@ -57,7 +56,12 @@ function App() {
           path="/admin"
           element={user ? <AdminPage /> : <Navigate to="/login" />}
         />
+        
       </Routes>
+  </div>
+  <div className="Todolist">
+      <TodoList />
+  </div>
   </div>
   );
 }
