@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { useState, ChangeEvent, FunctionComponent } from 'react';
 import TodoItem from './TodoItem';
+import '../App.css';
 
 interface Todo {
   id: number;
@@ -42,24 +43,33 @@ const deleteTask = (id: number) => {
   } else {
   return task;
   } 
-  }));
+  })
+  );
   }
  return (
   <div className="todo-list">
-  {tasks.map(task => (
-  <TodoItem
-  key={task.id} 
-  task={task}
-  deleteTask={() => deleteTask(task.id)}
-  toggleCompleted={() => toggleCompleted(task.id)}
-  />
-  ))}
- <input
-  value={text}
-  onChange={(e) => setText(e.target.value)} 
-  />
- <button onClick={addTask}>Add</button>
+    <div className="col-lg-6 col-md-4 col-sm-2 mx-auto mt-4">
+      <div className="colored-box text-center">
+              {tasks.map(task => (
+              <TodoItem
+              key={task.id} 
+              task={task}
+              deleteTask={() => deleteTask(task.id)}
+              toggleCompleted={() => toggleCompleted(task.id)}
+              />
+              ))}
+        <input
+            className="form-control mb-2"
+            value={text}
+            onChange={(e) => setText(e.target.value)} 
+            placeholder="Task"
+        />
+        <button className="btn btn-outline-light" onClick={addTask}>
+           Add task
+        </button>
+      </div>
+    </div>
   </div>
   );
- }
+ };
  export default TodoList;
