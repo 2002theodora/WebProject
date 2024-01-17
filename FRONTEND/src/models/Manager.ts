@@ -8,5 +8,7 @@ export interface Manager{
     ManagerDepartment: string,
     ManagerPhone: string | null,
     ManagerEmail: string | null,
-    Employees: Employee[] 
+    Employees: Employee[],
+    username: string,
+    password: string
 }

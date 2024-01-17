@@ -19,7 +19,9 @@ export default function EmployeeEdit() {
         EmployeeOccupation: "",
         EmployeePhone: "",
         EmployeeEmail: "",
-        Tasks: []
+        Tasks: [],
+        username: "",
+        password: ""
     })
 
     const [task, setTask] = useState<Task>({
@@ -174,6 +176,23 @@ export default function EmployeeEdit() {
                     value={employee.EmployeeEmail}
                     onChange={onChangeEmployee}
                     name="EmployeeEmail"
+                />
+            </div>
+
+            <div>
+                <TextField
+                    label="username"
+                    size="small"
+                    value={employee.username}
+                    onChange={onChangeEmployee}
+                    name="username"
+                />
+                <TextField
+                    label="password"
+                    size="small"
+                    value={employee.password}
+                    onChange={onChangeEmployee}
+                    name="password"
                 />
             </div>
 

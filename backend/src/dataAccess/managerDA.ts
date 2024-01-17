@@ -2,11 +2,15 @@ import Manager, { ManagerCreationAttributes } from "../entities/Manager";
 import { Tasks } from "../entities/dbConst";
 import { Like } from "./operators";
 import db from "../dbConfig";
-import Task from "../entities/Task";
 import managerFilterDto from "./models/managerFilterDto";
+import Employee from "../entities/Employee";
+
+async function getManagerById(id: number) {
+  return await Manager.findByPk(id, { include: [Employee] });
+}
 
 async function createManager(manager: ManagerCreationAttributes) {
-  return await Manager.create(manager, { include: [{ model: Task, as: Tasks }] });
+  return await Manager.create(manager, { include: [{ model: Employee}] });
 }
 
 async function getManager(managerFilter: managerFilterDto) {
@@ -34,10 +38,6 @@ async function getManager(managerFilter: managerFilterDto) {
 
 }
 
-async function getManagerById(id: number) {
-  return await Manager.findByPk(id, { include: [Tasks] });
-}
-
 async function deleteManager(id: number) {
   let deleteElem = await Manager.findByPk(id);
 
@@ -52,7 +52,7 @@ async function updateManager(manager: ManagerCreationAttributes, id: number) {
   const findManager = await getManagerById(manager.ManagerId);
 
   if (!findManager) {
-    console.log("This employee does not exist");
+    console.log("This manager does not exist");
     return;
   }
 
@@ -61,34 +61,39 @@ async function updateManager(manager: ManagerCreationAttributes, id: number) {
     await findManager.update(manager);
 
     // deleted
-    const existTask = await Task.findAll({
+    const existEmployees = await Employee.findAll({
       where: {
-        EmployeeId: manager.ManagerId,
+        EmployeeId: manager.Employees.map(employee => employee.EmployeeId),
       },
     });
-
-    if (existTask.length > 0) {
-      let TaskIds = existTask.map(a => a.dataValues.TaskId);
-      let TaskIdsDeleted = TaskIds.filter(id => !manager.Tasks.find(add => add.TaskId === id)?.TaskId)
-      if (TaskIdsDeleted.length > 0)
-        await Task.destroy({
+    
+    if (existEmployees.length > 0) {
+      let employeeIds = existEmployees.map(employee => employee.dataValues.EmployeeId);
+      let employeeIdsDeleted = employeeIds.filter(id => !manager.Employees.find(employee => employee.EmployeeId === id)?.EmployeeId);
+    
+      if (employeeIdsDeleted.length > 0) {
+        await Employee.destroy({
           where: {
-            TaskId: TaskIdsDeleted,
+            EmployeeId: employeeIdsDeleted,
           },
-        })
+        });
+      }
     }
-
-    // inserted 
-    const insertedA = manager.Tasks.filter(a => a.TaskId === 0)
-    if (insertedA.length > 0)
-      await Task.bulkCreate(insertedA)
-
-    // updated
-    const updatedA = manager.Tasks.filter(a => a.TaskId !== 0);
-    if (updatedA.length > 0) {
-      for (let item of updatedA) {
-        const findA = await Task.findByPk(item.TaskId);
-        await findA?.update(item);
+    
+    // Inserted
+    const insertedEmployees = manager.Employees.filter(employee => employee.EmployeeId === 0);
+    if (insertedEmployees.length > 0) {
+      await Employee.bulkCreate(insertedEmployees);
+    }
+    
+    // Updated
+    const updatedEmployees = manager.Employees.filter(employee => employee.EmployeeId !== 0);
+    if (updatedEmployees.length > 0) {
+      for (let employee of updatedEmployees) {
+        const foundEmployee = await Employee.findByPk(employee.EmployeeId);
+        if (foundEmployee) {
+          await foundEmployee.update(employee);
+        }
       }
     }
 

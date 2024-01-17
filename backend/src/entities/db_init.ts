@@ -1,33 +1,37 @@
-import mysql from 'mysql2/promise.js'
+import mysql from 'mysql2/promise';
 import env from 'dotenv';
 import Employee from './Employee';
+import Manager from './Manager';
 import Task from './Task';
 import { Tasks } from './dbConst';
 
 env.config();
 
-function createDatabase(){   
-    mysql.createConnection({
-    user : process.env.DB_USERNAME,
-    password : process.env.DB_PASSWORD
-    })
-    .then((connection) => {   
-    return connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_DATABASE}`)
-    })    
-    .catch((err) => {
-    console.warn(err.stack)
-    })
+async function createDatabase() {
+  try {
+    const connection = await mysql.createConnection({
+      user: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+    });
+
+    await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_DATABASE}`);
+    await connection.end();
+  } catch (err: any) {
+    console.warn((err as Error).stack);
+  }
 }
 
-function fkConfig()
-{
-    Employee.hasMany(Task, {as : Tasks, foreignKey: "EmployeeId"});
-    Task.belongsTo(Employee, { foreignKey: "EmployeeId"}) 
+function fkConfig() {
+  Employee.hasMany(Task, { as: Tasks, foreignKey: 'EmployeeId' });
+  Task.belongsTo(Employee, { foreignKey: 'EmployeeId' });
+
+  Manager.hasMany(Employee, { as: 'Employees', foreignKey: 'ManagerId' });
+  Employee.belongsTo(Manager, { foreignKey: 'ManagerId' });
 }
 
-function db_init(){
-    createDatabase();
-    fkConfig();    
+async function db_init() {
+  await createDatabase();
+  fkConfig();
 }
 
 export default db_init;

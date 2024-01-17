@@ -1,11 +1,10 @@
 import { ChangeEvent, useEffect, useState } from "react"
 import { Manager } from "../models/Manager"
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, TextField } from "@mui/material";
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useNavigate, useParams } from "react-router-dom";
 import { post, get, put } from "../api/Calls";
-import { Employee } from "../models/Employee";
 import _ from 'lodash';
 import EditIcon from '@mui/icons-material/Edit';
 
@@ -18,7 +17,9 @@ export default function ManagerEdit() {
         ManagerDepartment: "",
         ManagerPhone: "",
         ManagerEmail: "",
-        Employees: []
+        Employees: [],
+        username: "",
+        password: ""
     })
 
     const navigation = useNavigate();
@@ -109,6 +110,22 @@ export default function ManagerEdit() {
                     value={manager.ManagerEmail}
                     onChange={onChangeManager}
                     name="ManagerEmail"
+                />
+            </div>
+            <div>
+                <TextField
+                    label="username"
+                    size="small"
+                    value={manager.username}
+                    onChange={onChangeManager}
+                    name="username"
+                />
+                <TextField
+                    label="password"
+                    size="small"
+                    value={manager.password}
+                    onChange={onChangeManager}
+                    name="password"
                 />
             </div>
 

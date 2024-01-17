@@ -3,15 +3,10 @@ import Employee from "./views/Employee";
 import Manager from "./views/Manager";
 import EmployeeEdit from "./views/EmployeeEdit";
 import ManagerEdit from "./views/ManagerEdit";
-import Home from "./views/Home";
 import NotFound from "./views/NotFound";
+import AdminPage from "./views/AdminPage";
 
 export const routes = Object.freeze([
-    {
-        path:"/",
-        component: Home,
-        name: "Home"
-    },
     {
         path:"/Tasks",
         component: Task,
@@ -51,5 +46,10 @@ export const routes = Object.freeze([
         path:"/EditManager/:id",
         component: ManagerEdit,
         name: null
+    },
+    {
+        path: "/AdminPage",
+        component: AdminPage,
+        name: AdminPage
     }
 ]);

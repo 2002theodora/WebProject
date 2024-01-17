@@ -1,11 +1,11 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import { routes } from './routes';
-import ResponsiveAppBar from './components/Menu';
 import LoginScreen from './components/Login';
 import { useNavigate } from 'react-router-dom';
-import React, { useState } from 'react';
-import Admin from './views/Admin';
+import { useState } from 'react';
+import { Navigate } from 'react-router-dom';
+import AdminPage from './views/AdminPage';
+import { useEffect } from 'react';
 
 interface Admin {
   role: 'admin';
@@ -43,26 +43,22 @@ function App() {
     }
   };
 
-  return (
-    <div className="App">
-      
-      <Routes>
-        <Route path="/login" element={<LoginScreen onLogin={handleLogin} />} />
-        
-        {user ? (
-          <Route path="/admin" element={<Admin />} />
-        ) : (
-          (() => {
-            navigate('/login');
-            return null;
-          })()
-        )}
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+    }
+  }, [user, navigate]);
 
-        {routes.map((r, index) => (
-          <Route key={index} path={r.path} element={<r.component />} />
-        ))}
+  return (
+  <div className="App">
+    <Routes>
+        <Route path="/login" element={<LoginScreen onLogin={handleLogin} />} />
+        <Route
+          path="/admin"
+          element={user ? <AdminPage /> : <Navigate to="/login" />}
+        />
       </Routes>
-    </div>
+  </div>
   );
 }
 

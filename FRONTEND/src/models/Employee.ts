@@ -8,5 +8,7 @@ export interface Employee{
     EmployeeOccupation: string,
     EmployeePhone: string | null,
     EmployeeEmail: string | null,
-    Tasks: Task[]   
+    Tasks: Task[],
+    username: string,
+    password: string   
 }

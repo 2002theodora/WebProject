@@ -2,9 +2,8 @@ import db from '../dbConfig';
 import Sequelize from 'sequelize';
 import { ModelDefined } from 'sequelize';
 import { EmployeeAttributes } from './Employee.ts';
-import { CommonAttributes } from './CommonAttributes';
 
-export interface ManagerAttributes extends CommonAttributes{
+export interface ManagerAttributes{
     ManagerId : number,
     ManagerName: string,
     ManagerSurName: string,
@@ -67,11 +66,11 @@ const Manager : ModelDefined<ManagerAttributes, ManagerCreationAttributes> = db.
     username: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      password: {
+    },
+    password: {
         type: Sequelize.STRING,
         allowNull: false,
-      }
+    }
 });
 
 export default Manager;
