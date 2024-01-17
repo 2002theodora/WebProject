@@ -10,7 +10,7 @@ async function getManagerById(id: number) {
 }
 
 async function createManager(manager: ManagerCreationAttributes) {
-  return await Manager.create(manager, { include: [{ model: Employee}] });
+  return await Manager.create(manager, { include: [{ model: Employee, as: Tasks}] });
 }
 
 async function getManager(managerFilter: managerFilterDto) {

@@ -8,17 +8,17 @@ import AdminPage from "./views/AdminPage";
 
 export const routes = Object.freeze([
     {
-        path:"/Tasks",
+        path:"/tasks",
         component: Task,
         name: "Tasks"
     },
     {
-        path:"/Employee",
+        path:"/employee",
         component: Employee,
         name: "Employee"
     },
     {
-        path:"/Manager",
+        path:"/manager",
         component: Manager,
         name: "Manager"
     },

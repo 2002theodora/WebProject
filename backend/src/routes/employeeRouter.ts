@@ -13,19 +13,5 @@ employeeRouter.route('/employee').get( async (req, res) => {
   return res.json(await getEmployees(queryParams));
 })
 
-employeeRouter.route('/employee/:id').get( async (req, res) => {
-  let id = parseInt(req.params.id) 
-  return res.json(await getEmployeeById(id));
-})
-
-employeeRouter.route('/employee/:id').delete( async (req, res) => {
-  let id = parseInt(req.params.id) 
-  return res.json(await deleteEmployee(id));
-})
-
-employeeRouter.route('/employee/:id').put( async (req, res) => {
-  let id = parseInt(req.params.id) 
-  return res.json(await updateEmployee(req.body, id));
-})
 
 export default employeeRouter;

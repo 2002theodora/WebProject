@@ -22,7 +22,7 @@ app.use(cors(corsOptions));
 
 db_init();
 
-app.use("/api", masterRouter);
+app.use('/api', masterRouter);
 
 const port = process.env.PORT || 8001;
 app.listen(port);

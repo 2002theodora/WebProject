@@ -1,7 +1,9 @@
 import express from 'express';
 import db from '../dbConfig';
+import employeeRouter from './employeeRouter';
+import managerRouter from './managerRouter';
 
-let masterRouter = express.Router();
+const masterRouter = express.Router();
 
 masterRouter.route('/create').get(async (req, res) => {
     try{
@@ -13,5 +15,9 @@ masterRouter.route('/create').get(async (req, res) => {
         res.status(500).json({message : 'server error'})
     }
 });
+
+masterRouter.use('/employee', employeeRouter);
+
+masterRouter.use('/manager', managerRouter);
 
 export default masterRouter;

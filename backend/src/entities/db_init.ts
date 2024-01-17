@@ -25,7 +25,7 @@ function fkConfig() {
   Employee.hasMany(Task, { as: Tasks, foreignKey: 'EmployeeId' });
   Task.belongsTo(Employee, { foreignKey: 'EmployeeId' });
 
-  Manager.hasMany(Employee, { as: 'Employees', foreignKey: 'ManagerId' });
+  Manager.hasMany(Employee, { as: Tasks, foreignKey: 'ManagerId' });
   Employee.belongsTo(Manager, { foreignKey: 'ManagerId' });
 }
 

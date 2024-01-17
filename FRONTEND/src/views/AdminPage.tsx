@@ -40,7 +40,7 @@ export default function AdminPage() {
     e.preventDefault();
 
     try {
-      const createdManager = await post('/create-manager', managerData);
+      const createdManager = await post('/manager', managerData);
 
       console.log('Manager created successfully:', createdManager);
 
@@ -52,7 +52,7 @@ export default function AdminPage() {
   const createEmployee = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-        const createdEmployee = await post('/create-employee', employeeData);
+        const createdEmployee = await post('/employee', employeeData);
   
         console.log('Employee created successfully:', createdEmployee);
   
