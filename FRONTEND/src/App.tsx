@@ -62,9 +62,6 @@ function App() {
           <Route path="/employee" element={user ? <EmployeeList /> : <Navigate to="/login" />} />
         </Routes>
   </div>
-  <div className="Todolist">
-      <TodoList />
-  </div>
   </div>
   );
 }
