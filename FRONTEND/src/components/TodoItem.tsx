@@ -6,6 +6,9 @@ interface Todo {
     id: number;
     text: string;
     completed: boolean;
+    assignee?: string;
+  status: 'OPEN' | 'PENDING' | 'COMPLETED' | 'CLOSED';
+
   }
 //properties that TodoItem component expects
 interface TodoItemProps {
@@ -34,6 +37,8 @@ interface TodoItemProps {
             />
             {/* Display the text of the task */}
                 <p>{task.text}</p>
+                <p>{task.assignee}</p>
+                <p>Status: {task.status}</p>
             {/* Button to delete the task */}
             <button onClick={handleDelete}>X</button>
             </div>
