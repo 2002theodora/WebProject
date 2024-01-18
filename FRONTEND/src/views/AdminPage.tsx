@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { get, post, remove } from "../api/Calls";
 import { Employee } from "../models/Employee";
-import { Manager } from "../models/Manager";
 import { Box, Button, TextField } from "@mui/material";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import _ from "lodash";
