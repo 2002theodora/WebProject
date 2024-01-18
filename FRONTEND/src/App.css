@@ -1,12 +1,25 @@
 .App {
   text-align: center;
 }
+.colored-box {
+  background-color: #ffc0cb;
+  border: 4px solid white;
+  padding: 10px;
+}
 .todo-item {
   display: flex;
   justify-content: space-between;
   margin-bottom: 8px;
+  background-color: magenta;
+  border: 2px solid white;
+  padding: 8px;
  }
  .todo-item p {
-  color: #888;
-  text-decoration: line-through;
+  color: black;
+  font-weight: bold;
+  margin: 0;
+  text-decoration: none;
  }
+ .todo-item.completed p {
+  text-decoration: line-through; /* Text decoration when completed: line-through */
+}

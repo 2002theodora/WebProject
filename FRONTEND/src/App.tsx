@@ -1,11 +1,8 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate, Navigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import LoginScreen from './components/Login';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
 import AdminPage from './views/AdminPage';
-import { useEffect } from 'react';
 import ManagerList from './views/Manager';
 import EmployeeList from './views/Employee';
 import TodoList from './components/TodoList';
@@ -65,7 +62,9 @@ function App() {
           <Route path="/employee" element={user ? <EmployeeList /> : <Navigate to="/login" />} />
         </Routes>
   </div>
-
+  <div className="Todolist">
+      <TodoList />
+  </div>
   </div>
   );
 }
